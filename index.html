@@ -6,6 +6,11 @@
   <title>AR Puzzle Game</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
   <style>
     body, html {
       margin: 0;
@@ -140,17 +145,17 @@
       </a-marker>
       
       <!-- 第一個 marker 和對應的 GLB 模型 -->
-      <a-marker type="pattern" url="http://127.0.0.1:5000/data/image?name=pattern.patt" id="pattern">
-        <a-entity gltf-model="http://127.0.0.1:5000/data/image?name=model.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      <a-marker type="pattern" url="pattern.patt" id="pattern">
+        <a-entity gltf-model="model.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
       </a-marker>
 
-      <a-marker type="pattern" url="http://127.0.0.1:5000/data/image?name=pattern2.patt" id="pattern2">
-        <a-entity gltf-model="http://127.0.0.1:5000/data/image?name=model3.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      <a-marker type="pattern" url="pattern2.patt" id="pattern2">
+        <a-entity gltf-model="model3.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
       </a-marker>
       
       <!-- 第二個 marker 和對應的 GLB 模型 -->
       <a-marker preset="kanji" id="pattern2">
-        <a-entity gltf-model="http://127.0.0.1:5000/data/image?name=model2.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+        <a-entity gltf-model="model2.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
