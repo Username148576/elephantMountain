@@ -257,12 +257,10 @@
                "https://imgur.com/c2Tk7lH.jpeg", "https://imgur.com/4lXRTKI.jpeg", "https://imgur.com/kGal5qZ.jpeg", "https://imgur.com/bt4xGDW.jpeg"]
 
     function initBoard() {
-        board = document.getElementById("board");
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < columns; c++) {
                 let tile = document.createElement("img");
-                tile.classList.add("img");
-                tile.src = "https://imgur.com/cwjnyoW.jpeg"; // Initially blank
+                tile.src = "./images/blank.jpg"; // Initially blank
 
                 tile.setAttribute("data-value", r * columns + c + 1); // Store position in data-value
                 tile.addEventListener("dragstart", dragStart);
@@ -272,15 +270,21 @@
                 tile.addEventListener("drop", dragDrop);
                 tile.addEventListener("dragend", dragEnd);
 
+                // Add touch event listeners
+                tile.addEventListener("touchstart", touchStart);
+                tile.addEventListener("touchmove", touchMove);
+                tile.addEventListener("touchend", touchEnd);
+
                 correctOrder.push(tile.src);
                 board.append(tile);
             }
         }
     }
 
+
     // Shuffle pieces and display them
     function shufflePieces() {
-        for (let i = 0; i < rows * columns; i++) {
+        for (let i = 1; i <= rows * columns; i++) {
             pieces.push(i);
         }
         pieces.sort(() => Math.random() - 0.5);
@@ -288,11 +292,12 @@
         let pieceTiles = document.querySelectorAll("#board img");
         for (let i = 0; i < pieceTiles.length; i++) {
             let randomPiece = pieces[i];
-            pieceTiles[i].src = url[randomPiece]; // Change to shuffled images
+            pieceTiles[i].src = "./images/" + randomPiece + ".png"; // Change to shuffled images
             pieceTiles[i].setAttribute("data-value", randomPiece);
         }
     }
 
+    // Drag and Drop events
     function dragStart() {
         currTile = this; // The tile that was clicked to drag
     }
@@ -314,6 +319,29 @@
     }
 
     function dragEnd() {
+        swapTiles();
+    }
+
+    // Touch events for mobile
+    function touchStart(e) {
+        currTile = e.target;
+    }
+
+    function touchMove(e) {
+        e.preventDefault();
+    }
+
+    function touchEnd(e) {
+        otherTile = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        if (otherTile && otherTile.tagName === "IMG") {
+            swapTiles();
+        }
+    }
+
+    // Swap the tiles
+    function swapTiles() {
+        if (!otherTile || !currTile) return;
+
         // Swap the images
         let currImg = currTile.src;
         let otherImg = otherTile.src;
@@ -327,6 +355,7 @@
         otherTile.setAttribute("data-value", currValue);
 
         turns++;
+        document.getElementById("turns").innerText = turns;
 
         // Check if the player has won
         checkWin();
@@ -339,26 +368,17 @@
         
         for (let i = 0; i < tiles.length; i++) {
             let tileValue = tiles[i].getAttribute("data-value");
-            if (tileValue != i.toString()) {
+            if (tileValue != (i + 1).toString()) {
                 isWin = false;
-            }
-            else {
-                tiles[i].removeEventListener("dragstart", dragStart);
-                tiles[i].removeEventListener("dragover", dragOver);
-                tiles[i].removeEventListener("dragenter", dragEnter);
-                tiles[i].removeEventListener("dragleave", dragLeave);
-                tiles[i].removeEventListener("drop", dragDrop);
-                tiles[i].removeEventListener("dragend", dragEnd);
-
+            } else {
                 tiles[i].style.opacity = "0.5";
             }
-
         }
 
         if (isWin) {
             document.getElementById("status").innerText = "Congratulations! You solved the puzzle!";
 
-            // 禁用所有拖拽功能
+            // Disable dragging and touch interactions
             tiles.forEach(tile => {
                 tile.removeEventListener("dragstart", dragStart);
                 tile.removeEventListener("dragover", dragOver);
@@ -366,6 +386,10 @@
                 tile.removeEventListener("dragleave", dragLeave);
                 tile.removeEventListener("drop", dragDrop);
                 tile.removeEventListener("dragend", dragEnd);
+
+                tile.removeEventListener("touchstart", touchStart);
+                tile.removeEventListener("touchmove", touchMove);
+                tile.removeEventListener("touchend", touchEnd);
             });
         }
     }
