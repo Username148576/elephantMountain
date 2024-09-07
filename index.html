@@ -279,7 +279,7 @@
 
     // Shuffle pieces and display them
     function shufflePieces() {
-        for (let i = 1; i <= rows * columns; i++) {
+        for (let i = 0; i < rows * columns; i++) {
             pieces.push(i);
         }
         pieces.sort(() => Math.random() - 0.5);
@@ -287,7 +287,7 @@
         let pieceTiles = document.querySelectorAll("#board img");
         for (let i = 0; i < pieceTiles.length; i++) {
             let randomPiece = pieces[i];
-            pieceTiles[i].src = "./images/" + randomPiece + ".png"; // Change to shuffled images
+            pieceTiles[i].src = url[randomPiece]; // Change to shuffled images
             pieceTiles[i].setAttribute("data-value", randomPiece);
         }
     }
@@ -363,7 +363,7 @@
         
         for (let i = 0; i < tiles.length; i++) {
             let tileValue = tiles[i].getAttribute("data-value");
-            if (tileValue != (i + 1).toString()) {
+            if (tileValue != i.toString()) {
                 isWin = false;
             } else {
                 tiles[i].style.opacity = "0.5";
