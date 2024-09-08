@@ -256,7 +256,7 @@
             for (let c = 0; c < columns; c++) {
                 let tile = document.createElement("img");
                 tile.src = "https://imgur.com/cwjnyoW.jpeg"; // Initially blank
-                tile.className = "img";
+                tile.classList.add("img");
 
                 tile.setAttribute("data-value", r * columns + c + 1); // Store position in data-value
                 tile.addEventListener("dragstart", dragStart);
@@ -355,7 +355,7 @@
 
     // Check if the current board configuration matches the correct order
     function checkWin() {
-        let tiles = document.querySelectorAll("#board #img");
+        let tiles = document.querySelectorAll("#board img");
         let isWin = true;
         
         for (let i = 0; i < tiles.length; i++) {
