@@ -246,7 +246,7 @@
     var board;
     var correctOrder = [];
     var pieces = [];
-    var url = ["https://imgur.com/UOgrReE.jpeg", "https://imgur.com/gd2abMb.jpeg", "https://imgur.com/QiprobU.jpeg", "https://imgur.com/mt5v8I0.jpeg",
+    var url = ["", "https://imgur.com/UOgrReE.jpeg", "https://imgur.com/gd2abMb.jpeg", "https://imgur.com/QiprobU.jpeg", "https://imgur.com/mt5v8I0.jpeg",
                "https://imgur.com/H26dRDe.jpeg", "https://imgur.com/4ibx1uj.jpeg", "https://imgur.com/EX8h4Dl.jpeg", "https://imgur.com/m5FXSp7.jpeg",
                "https://imgur.com/7GaKIrg.jpeg", "https://imgur.com/lRHlNsW.jpeg", "https://imgur.com/Kshi9Sa.jpeg", "https://imgur.com/wR22QKv.jpeg",
                "https://imgur.com/c2Tk7lH.jpeg", "https://imgur.com/4lXRTKI.jpeg", "https://imgur.com/kGal5qZ.jpeg", "https://imgur.com/bt4xGDW.jpeg"]
@@ -255,7 +255,7 @@
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < columns; c++) {
                 let tile = document.createElement("img");
-                tile.src = "./images/blank.jpg"; // Initially blank
+                tile.src = "https://imgur.com/cwjnyoW.jpeg"; // Initially blank
 
                 tile.setAttribute("data-value", r * columns + c + 1); // Store position in data-value
                 tile.addEventListener("dragstart", dragStart);
@@ -276,10 +276,9 @@
         }
     }
 
-
     // Shuffle pieces and display them
     function shufflePieces() {
-        for (let i = 0; i < rows * columns; i++) {
+        for (let i = 1; i <= rows * columns; i++) {
             pieces.push(i);
         }
         pieces.sort(() => Math.random() - 0.5);
@@ -363,7 +362,7 @@
         
         for (let i = 0; i < tiles.length; i++) {
             let tileValue = tiles[i].getAttribute("data-value");
-            if (tileValue != i.toString()) {
+            if (tileValue != (i + 1).toString()) {
                 isWin = false;
             } else {
                 tiles[i].style.opacity = "0.5";
