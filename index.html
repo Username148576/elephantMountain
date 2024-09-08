@@ -241,7 +241,6 @@
 
     var rows = 4;
     var columns = 4;
-    var turns = 0;
     var currTile, otherTile;
     var board;
     var correctOrder = [];
@@ -350,16 +349,13 @@
         currTile.setAttribute("data-value", otherValue);
         otherTile.setAttribute("data-value", currValue);
 
-        turns++;
-        document.getElementById("turns").innerText = turns;
-
         // Check if the player has won
         checkWin();
     }
 
     // Check if the current board configuration matches the correct order
     function checkWin() {
-        let tiles = document.querySelectorAll("#board img");
+        let tiles = document.querySelectorAll("#board #img");
         let isWin = true;
         
         for (let i = 0; i < tiles.length; i++) {
