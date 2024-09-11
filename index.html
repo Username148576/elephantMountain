@@ -14,41 +14,9 @@
       font-family: Arial, sans-serif;
     }
 
-    /* 左側導航欄 */
-    #sidebar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 150px;
-      background-color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      z-index: 10;
-    }
-
-    /* 導航按鈕樣式 */
-    .nav-button {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      color: white;
-      background-color: #444;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .nav-button:hover {
-      background-color: #555;
-    }
-
     /* 內容區域 */
     .content {
-      margin-left: 150px;
-      width: calc(100% - 150px);
+      width: 100vw;
       height: 100vh;
       display: none; /* 頁面預設隱藏 */
     }
@@ -77,7 +45,7 @@
 
     /* AR.js場景樣式 */
     #ar-scene {
-    width: 80%; /* 設置寬度為80% */
+    width: 100vw; /* 設置寬度為80% */
     height: 100vh; /* 設置高度為100vh */
     margin: 0 auto; /* 使場景居中 */
     }
@@ -99,12 +67,6 @@
   </style>
 </head>
 <body>
-
-  <!-- 左側導航欄 -->
-  <div id="sidebar">
-    <button class="nav-button" onclick="showPage('ar-page')">遊戲頁面</button>
-    <button class="nav-button" onclick="showPage('shop-page')">商城</button>
-  </div>
 
   <!-- 遊戲頁面內容 -->
   <div id="ar-page" class="content"> <!-- 初始顯示的頁面 -->
